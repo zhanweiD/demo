@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style type="text/css">
+    #wrap{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate3d(-50%,-50%,0);
+      perspective: 500px;
+      transform-style: preserve-3d;
+    }
+    #wrap>p{
+      text-align: center;
+      margin-top: 20px;
+      font-size: 20px;
+    }
+    #wrap>img{
+      animation: rotate 3s linear infinite running;
+    }
+    @keyframes rotate {
+      from{
+        transform: rotateY(0deg);
+      }
+      to{
+        transform: rotateY(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="wrap">
+    <img src="img/load/logo3.png" alt="">
+    <p>已加载0%</p>
+  </div>
+  <script src="js/data.js"></script>
+  <script type="text/javascript">
+    window.onload=function () {
+
+
+    var p=document.querySelector("#wrap>p")
+    var arr=[]
+
+    var index=0
+    for ( var item in imgData) {
+      arr = arr.concat(imgData[item])
+    }
+    for (var i=0;i<arr.length;i++){
+      var imgArr=document.createElement("img")
+      imgArr.src=arr[i]
+      imgArr.onload=function () {
+        index++
+        p.innerHTML="已加载"+Math.round(index/arr.length*100)+"%"
+      }
+    }
+    }
+  </script>
+</body>
+</html>

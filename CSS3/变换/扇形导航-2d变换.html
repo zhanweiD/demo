@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style type="text/css">
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    html,body{
+      height: 100%;
+      overflow: hidden;
+    }
+    #wrap{
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+    #wrap>img{
+      position: absolute;
+      left: 0;
+      top: 0;
+      margin: 4px;
+      border-radius: 50%;
+    }
+    #bj>img{
+      position: absolute;
+      left: 0;
+      top: 0;
+      margin: 0.5px;
+      border-radius: 50%;
+      transition: 1.5s;
+    }
+
+  </style>
+</head>
+<body>
+  <div id="wrap">
+    <img src="img/clos.png" alt="">
+    <img src="img/full.png" alt="">
+    <img src="img/open.png" alt="">
+    <img src="img/prev.png" alt="">
+    <img src="img/refresh.png" alt="">
+    <div id="bj"><img src="img/home.png" alt=""></div>
+
+  </div>
+  <script type="text/javascript">
+    window.onload=function () {
+      var home=document.querySelector("#bj>img")
+      var imgArr=document.querySelectorAll("#wrap>img")
+      var x=0,y=0
+      var c=150,angle=90/4
+      var index=false
+
+      home.onclick=function () {
+        if (index) {
+          home.style.transform="rotate(0deg)"
+          moveHide()
+        }else{
+          home.style.transform="rotate(1080deg)"
+          moveShow()
+        }
+        index=!index
+      }
+
+      //一个计算想x,y的函数
+      function XY(c,angle) {
+        x=c*Math.sin(angle*Math.PI/180)
+        y=c*Math.cos(angle*Math.PI/180)
+      }
+
+      //img移动旋转展出
+      function  moveShow() {
+        for (var i=0;i<imgArr.length;i++){
+          XY(c,angle*i)
+          imgArr[i].style.transition="1s "+(i*0.1)+"s"
+          imgArr[i].style.transform="rotate(720deg) scale(1)"
+          imgArr[i].style.left = -x+"px"
+          imgArr[i].style.top = -y+"px"
+          imgArr[i].onclick=function () {
+            this.style.transform="rotate(720deg) scale(2)"
+            this.style.opacity="0.1"
+            this.style.transition="0.5s"
+            this.addEventListener("transitionend",function () {
+              this.style.transform="rotate(720deg) scale(1)"
+              this.style.opacity="1"
+              this.style.transition="0.5s"
+              //this.removeEventListener("transitionend" ，函数名)   想要移除必须有函数名
+            })
+          }
+        }
+      }
+      //img收回
+      function moveHide() {
+        for (var i=0;i<imgArr.length;i++){
+          imgArr[i].style.transition="1s "+((5-i)*0.1)+"s"
+          imgArr[i].style.transform="rotate(0deg) scale(1)"
+          imgArr[i].style.left = "0px"
+          imgArr[i].style.top = "0px"
+        }
+      }
+    }
+  </script>
+</body>
+</html>

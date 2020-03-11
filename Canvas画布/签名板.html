@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style type="text/css">
+    canvas{
+      display: block;
+      background: #88c5e1;
+      margin:200px auto;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas">
+    你的浏览器需要升级
+  </canvas>
+  <script type="text/javascript">
+    (function () {
+      var canvas=document.querySelector("#canvas")
+      var ctx=canvas.getContext("2d")
+      canvas.width=600
+      canvas.height= 400
+      ctx.strokeStyle="red"
+      ctx.fillStyle="yellow"
+      ctx.lineWidth=5
+
+      canvas.onmousedown=function(event){
+        event = event||document.event
+        //每次点击开启路径
+        ctx.beginPath()
+
+        //绘制路径
+        ctx.moveTo(event.offsetX,event.offsetY)
+        document.onmousemove=function (event) {
+          event = event||document.event
+          ctx.lineTo(event.clientX-canvas.offsetLeft,event.clientY-canvas.offsetTop)
+          ctx.stroke()
+        }
+      }
+      document.onmouseup=function () {
+        document.onmousemove=null
+      }
+    })()
+  </script>
+</body>
+
+</html>

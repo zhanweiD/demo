@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+请选择出生地：<input type="text" name="native" id="native"><br><br>
+<select id="province">
+  <option >请选择省份</option>
+</select>
+<select name="" id="city">
+  <option >请选择市区</option>
+</select>
+<select name="" id="section">
+  <option >请选择区/县</option>
+</select>
+<script type="text/javascript" src="js/jquery-1.12.4.js"></script>
+<script type="text/javascript">
+  $(function () {
+    let $province=$("#province")
+    let $city=$("#city")
+    let $section=$("#section")
+    let native=document.getElementById("native")
+    //页面加载完毕自动获取省份信息
+    ;(async ()=>{
+      await send("http://localhost:3000/province",$province)
+    })()
+
+    //1.当province选择框value发生变化时，找出value对应ID，发送city请求
+    $province.change(async function () {
+      native.value=this.value
+      await getId($province,$city,"city")
+    })
+    //2.当city选择框value发生变化时，找出value对应ID，发送section请求
+    $city.change(async function () {
+      //设置city值之前重置province
+      native.value=$province.val()
+      native.value +=this.value
+      await getId($city,$section,"section")
+    })
+    //3.当section选择框value发生变化时，找出value对应ID
+    $section.change(async function () {
+      //设置section值之前重置province和city
+      native.value=$province.val()+$city.val()
+      native.value +=this.value
+      let optionArr=$("#section>option:not(:first-child)")
+       for (let i=0;i<optionArr.length;i++) {
+          if (optionArr[i].innerHTML===this.value){
+            let urlFour="http://localhost:3000/site?id="+optionArr[i].id
+            await sendAjax(urlFour)
+          }
+       }
+    })
+
+    //4.选择框value改变，找到value对应的ID
+    async function getId(obj1,obj2,route){
+      //匹配obj1中的value
+      let optionArr=obj1.children("option:not(:first-child)")
+      for (let i=0;i<optionArr.length;i++) {
+        if (optionArr[i].innerHTML===obj1.val()){
+          let url=`http://localhost:3000/${route}?id=${optionArr[i].id}`
+          await send(url,obj2)
+        }
+      }
+    }
+
+    //5.动态生成option，传入URL和要生成option的选择框
+    async function send(url,obj){
+      //删除上个选择创建的option
+      obj.children("option:not(:first-child)").remove()
+      await sendAjax(url).then((data)=>{
+        //生成option
+        for (let value of data) {
+          let option=`<option id=${value.code}>${value.name}</option>`
+          obj.append(option)
+        }
+      })
+    }
+
+    //6.发送ajax请求
+    async function sendAjax(url) {
+      return await new Promise((resolve,reject)=>{
+        $.get(url,(data)=>{
+          resolve(data)
+        })
+      })
+    }
+  })
+</script>
+</body>
+</html>

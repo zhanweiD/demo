@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style type="text/css">
+    #center{
+      width: 100px;
+      height: 100px;
+      position: absolute;
+      background: #333333;
+      z-index: 1;
+      border-radius: 50%;
+    }
+    #img{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+    }
+  </style>
+</head>
+<body>
+  <div id="center"></div>
+  <img src="images/trump.jpg" alt="" id="img">
+  <script type="text/javascript">
+    var drag=document.querySelector("#center")
+    var img=document.querySelector("#img")
+    var r2=img.getBoundingClientRect().right
+    var l2=img.getBoundingClientRect().left
+    var t2=img.getBoundingClientRect().top
+    var b2=img.getBoundingClientRect().bottom
+
+    //绑定元素点击函数
+    drag.onmousedown=function (event) {
+      //获取单击位置距离元素的偏移量
+      var left=event.offsetX
+      var top=event.offsetY
+      //console.log(drag.offsetWidth)
+      //为document绑定鼠标移动函数
+      document.onmousemove=function (event) {
+
+
+        var r1=drag.getBoundingClientRect().right
+        var l1=drag.getBoundingClientRect().left
+        var t1=drag.getBoundingClientRect().top
+        var b1=drag.getBoundingClientRect().bottom
+
+        if (r1<l2||b1<t2||l1>r2||t1>b2) {
+          img.src="images/trump.jpg"
+        }else{
+          img.src="images/boom.gif"
+        }
+        //计算要设置给元素的left和top值，
+        //用移动位置距离窗口的位置减去点击位置距元素的偏移量
+        var drawLeft=event.clientX-left
+        var drawTop=event.clientY-top
+
+        //禁止移出视口
+        if (drawLeft<0){
+          drawLeft=0
+        } else if (drawLeft>window.innerWidth-drag.offsetWidth){
+          drawLeft=window.innerWidth-drag.offsetWidth
+        }
+        if (drawTop<0){
+          drawTop=0
+        } else if (drawTop>window.innerHeight-drag.offsetHeight){
+          drawTop=window.innerHeight-drag.offsetHeight
+        }
+
+        //设置元素的left和top值
+        drag.style.top=drawTop+"px"
+        drag.style.left=drawLeft+"px"
+      }
+
+      //鼠标松开，解除移动函数
+      document.onmouseup=function () {
+        this.onmousemove=null
+      }
+    }
+  </script>
+</body>
+</html>

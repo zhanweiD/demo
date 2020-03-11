@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style type="text/css">
+    a{
+      text-decoration: none;
+      color: gray;
+    }
+    #wrap>.box{
+      display: flex;
+    }
+    #wrap>.box>a{
+      text-align: center;
+      flex-wrap: nowrap;
+      flex: 1;
+    }
+    #wrap>.box>a:before{
+      content: "";
+      display: block;
+      width: 86px;
+      height: 85px;
+      margin: 0px auto;
+    }
+    #wrap>.box:nth-child(1)>a:nth-child(1):before{
+      background: url("img/01.png");
+    }
+    #wrap>.box:nth-child(1)>a:nth-child(2):before{
+      background: url("img/02.png");
+    }
+    #wrap>.box:nth-child(1)>a:nth-child(3):before{
+      background: url("img/03.png");
+    }
+    #wrap>.box:nth-child(1)>a:nth-child(4):before{
+      background: url("img/04.png");
+    }
+    #wrap>.box:nth-child(1)>a:nth-child(5):before{
+      background: url("img/05.png");
+    }
+    #wrap>.box:nth-child(2)>a:nth-child(1):before{
+      background: url("img/06.png");
+    }
+    #wrap>.box:nth-child(2)>a:nth-child(2):before{
+      background: url("img/07.png");
+    }
+    #wrap>.box:nth-child(2)>a:nth-child(3):before{
+      background: url("img/08.png");
+    }
+    #wrap>.box:nth-child(2)>a:nth-child(4):before{
+      background: url("img/09.png");
+    }
+    #wrap>.box:nth-child(2)>a:nth-child(5):before{
+      background: url("img/10.png");
+    }
+  </style>
+</head>
+<body>
+  <div id="wrap">
+    <div class="box">
+      <a href="javascript:;">天猫</a>
+      <a href="javascript:;">聚划算</a>
+      <a href="javascript:;">天猫国际</a>
+      <a href="javascript:;">外卖</a>
+      <a href="javascript:;">天猫超市</a>
+    </div>
+    <div class="box">
+      <a href="javascript:;">充值中心</a>
+      <a href="javascript:;">飞猪旅行</a>
+      <a href="javascript:;">领金币</a>
+      <a href="javascript:;">拍卖</a>
+      <a href="javascript:;">分类</a>
+    </div>
+  </div>
+</body>
+</html>

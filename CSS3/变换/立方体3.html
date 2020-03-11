@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style type="text/css">
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    html,body{
+      height: 100%;
+      overflow: hidden;
+    }
+    #wrap1{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      width: 600px;
+      height: 600px;
+      border: black 1px solid;
+      perspective: 400px;
+      transform-style: preserve-3d;
+    }
+    #wrap{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin-left: -100px;
+      margin-top: -100px;
+      width: 200px;
+      height: 200px;
+      transform-style: preserve-3d;
+      transition: 3s;
+      transform-origin: center center -100px;
+    }
+    #wrap>div{
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background: #449fdb;
+      text-align: center;
+      font: 50px/200px "微软雅黑";
+      backface-visibility: hidden;
+    }
+    #wrap>.top{
+      top: -200px;
+      transform-origin: bottom;
+      transform: rotateX(90deg);
+    }
+    #wrap>.bottom{
+      bottom: -200px;
+      transform-origin: top;
+      transform: rotateX(-90deg);
+    }
+    #wrap>.left{
+      left: -200px;
+      transform-origin: right;
+      transform: rotateY(-90deg);
+    }
+    #wrap>.right{
+      transform-origin:left;
+      transform: rotateY(90deg);
+      right: -200px;
+    }
+    #wrap>.after{
+      transform: translateZ(-200px) rotateX(180deg);
+    }
+    #wrap1:hover #wrap{
+      transform:rotateX(360deg);
+    }
+  </style>
+</head>
+<body>
+<div id="wrap1">
+  <div id="wrap">
+    <div class="before">前</div>
+    <div class="after" >后</div>
+    <div class="left">左</div>
+    <div class="right">右</div>
+    <div class="top">上</div>
+    <div class="bottom">下</div>
+  </div>
+</div>
+<script type="text/javascript">
+  var div=document.querySelector("#wrap")
+</script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+@import "reset.less";
+
+#header div{
+  width: 100%;
+  height: 2rem;
+  line-height: 2rem;
+  background: rgba(0,0,0,.8);
+  font-size: .8rem;
+  font-family: "宋体";
+  text-align: center;
+  color: #fff;
+  opacity: 1;
+}
+#content{
+  overflow: hidden;
+  position: relative;
+  #wrap{
+    .wrap-ul{
+      li{
+        width: 7rem;
+        height: 7rem;
+        margin: 0.5rem;
+        border-radius: 20px;
+        float: left;
+        background-color:#ccc;
+        background-image: url(../img/loadingImg.gif);
+        background-position: center;
+        background-repeat: no-repeat;
+        img{
+          width: 100%;
+          height: 100%;
+          border-radius:20px ;
+          opacity: 0;
+          transition: 2s;
+        }
+      }
+    }
+    .bottom{
+      width: 100%;
+      height: 4rem;
+      position: absolute;
+      bottom: -4rem;
+      left: 0;
+      text-align: center;
+      line-height: 4rem;
+      font-family: '宋体';
+      font-size: 2rem;
+      transform: scale(0);
+    }
+  }
+  #scroll{
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 4px;
+    background: #5a5a5a;
+    border-radius: 2px;
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+}
+#bigImg{
+  transform: scale(0);
+  transition: 1s transform;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: #EEEEEE;
+  z-index: 100;
+  .imgHeader{
+    background: rgba(0,0,0,.8);
+    height: 2rem;
+    header{
+      height: 2rem;
+      line-height: 2rem;
+      font-size: .8rem;
+      font-family: "宋体";
+      color: #fff;
+      text-align: center;
+      a{
+        color: #fff;
+        float: right;
+        color: #fff;
+        margin-right: 10px;
+        margin-left: -10px;
+      }
+    }
+  }
+  img{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 12rem;
+    height: 12rem;
+  }
+}

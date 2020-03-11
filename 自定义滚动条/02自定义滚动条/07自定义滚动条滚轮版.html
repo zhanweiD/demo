@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义滚动条</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        /*去掉系统滚动条*/
+        html,body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #scrollBar {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40px;
+            height: 100%;
+            background: #ccc;
+        }
+        #slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: deeppink;
+        }
+
+        #content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <!-- 内容 -->
+    <div id="content"></div>
+
+
+    <!-- 滚动条 -->
+    <div id="scrollBar">
+        <div id="slider"></div>
+    </div>
+
+
+    <script>
+        (function () {
+            // 获取元素
+            var slider = document.querySelector('#slider');
+            var content = document.querySelector('#content');
+            var scrollBar = document.querySelector('#scrollBar');
+
+            // 创造内容
+            for (var i = 0; i <= 300; i ++) {
+                content.innerHTML += i + '<br>';
+            }
+
+            // 计算滑块的高度
+            // 计算视口高度在内容高度所占的比例
+            var scale = window.innerHeight / content.offsetHeight;
+            // 判断
+            if (scale >= 1) {
+                scrollBar.remove();  // 删除元素
+                return;
+            }
+            // 设置滚动滑块的高度
+            slider.style.height = window.innerHeight * scale + 'px';
+
+            // 鼠标按下事件
+            slider.onmousedown = function(event){
+                // 获取鼠标在元素上的位置
+                var eleTop = event.offsetY;
+
+                // 鼠标移动事件
+                document.onmousemove = function(event){
+                    // 计算滑块位置
+                    var dstTop = event.clientY - eleTop;
+                    //设置位置
+                    setOffset(dstTop);
+
+                };
+
+                // 鼠标抬起事件
+                document.onmouseup = function () {
+                    this.onmousemove = null; // 取消事件监听
+                };
+
+                //阻止浏览器默认行为
+                event.preventDefault();
+                return false;
+            };
+
+
+            // 绑定 滚轮事件
+            // chrome 、 ie
+            document.onmousewheel = scrollFn;
+            // firefox
+            document.addEventListener('DOMMouseScroll', scrollFn)
+
+            /**
+             * 滚轮绑定的事件
+             */
+            function scrollFn(event){
+
+                var addValue = 0;  // 滑块位置的变化
+
+                if (event.wheelDelta) {
+                    // ie chrome
+                    if (event.wheelDelta > 0) {
+                        // 向上
+                        addValue = -5;
+                    } else {
+                        // 向下
+                        addValue = 5;
+                    }
+
+                } else if (event.detail) {
+                    // firfox
+                    if (event.detail < 0) {
+                        // 向上
+                        addValue = -5;
+                    } else {
+                        // 向下
+                        addValue = 5;
+                    }
+                }
+
+                // 计算滑块的位置
+                var dstTop = slider.offsetTop + addValue;
+
+                // 设置位置
+                setOffset(dstTop);
+            }
+
+
+            /**
+             * 设置滑块和内容的位置
+             * 参数： 滑块的位置（top值）
+             */
+            function setOffset(dstTop) {
+                // 范围限定
+                if (dstTop < 0) {
+                    dstTop = 0;
+                } else if (dstTop > window.innerHeight - slider.offsetHeight) {
+                    dstTop = window.innerHeight - slider.offsetHeight;
+                }
+
+
+                //设置滑块位置
+                slider.style.top = dstTop + 'px';
+
+                // 设置内容的位置
+                content.style.top = - dstTop / scale + 'px';
+            }
+        })();
+
+    </script>
+</body>
+</html>

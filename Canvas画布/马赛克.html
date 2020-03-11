@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style type="text/css">
+    canvas{
+      background: #888888;
+      display: block;
+      margin: 100px auto;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+  <script type="text/javascript">
+    (function () {
+      //获取对象
+      var myCanvas=document.querySelector("#canvas")
+      myCanvas.width=1000
+      myCanvas.height=600
+      var ctx=myCanvas.getContext("2d")
+
+      //创建img并指定路径
+      var img=new Image()
+      img.src = "image/1.jpg"
+
+      //加载完毕后
+      img.onload=function () {
+
+        //绘制img并读取绘制的img信息
+        ctx.drawImage(img,0,0,500,600)
+        var imageData=ctx.getImageData(0,0,500,600)
+
+        //或者创建一个空白区域，重新写入像素，不影响读取像素。写入时写入新的像素区域，读取时读取获取的像素信息
+        //var newimageData=ctx.createImageData(500,600)
+
+        // writePx(imageData,10,10,[255,0,0,255])
+        // console.log(readPx(imageData,10,10))
+
+
+        //修改原有像素
+        mosaic(imageData,5)
+        //修改完毕后，重新写入图像
+        ctx.putImageData(imageData,500,0)
+
+      }
+
+      //马赛克封装函数，
+      function mosaic(imageData,size) {
+        for (var i=0;i<imageData.width;i+=size){
+          for (var j=0;j<imageData.height;j+=size){
+            //读取像素信息
+            var colorArray=readPx(imageData,i + Math.floor(Math.random()*size),j + Math.floor(Math.random()*size))
+
+            for (var a = 0; a < size; a++) {
+              for (var b = 0; b < size; b++) {
+                //写入像素信息
+                writePx(imageData,i+a, j+b, colorArray)
+              }
+            }
+          }
+        }
+      }
+     
+      //封装一个修改单个像素的方法
+      function writePx(imageData,x,y,colors){
+        var width=imageData.width
+        imageData.data[y*width*4+x*4+0]=colors[0]
+        imageData.data[y*width*4+x*4+1]=colors[1]
+        imageData.data[y*width*4+x*4+2]=colors[2]
+        imageData.data[y*width*4+x*4+3]=colors[3]
+      }
+
+      //读取一个像素的信息
+      function readPx(imageData,x,y){
+        var colors=[]
+        var width=imageData.width
+        colors[0]=imageData.data[y*width*4+x*4+0]
+        colors[1]=imageData.data[y*width*4+x*4+1]
+        colors[2]=imageData.data[y*width*4+x*4+2]
+        colors[3]=imageData.data[y*width*4+x*4+3]
+        return colors
+      }
+    })()
+  </script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+html,body{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+//视频样式设置
+#video{
+  display: block;
+  background: black;
+}
+//控制条样式设置
+#controlBar{
+  height: 25px;
+  background: #2A2A2A;
+  display: flex;
+  align-items: center;
+
+  //播放暂停按钮设置
+  #playBtn{
+    width: 55px;
+    height: 25px;
+    display: flex;
+    flex: none;
+    justify-content: space-between;
+    align-items: center;
+    div{
+      width: 9px;
+      height: 11px;
+      background: url("../image/icon.png") no-repeat;
+
+      &:first-child{
+        margin-left: 8px;
+        background-position: 0 -22px;
+        &.active{
+          background-position: 0 -11px;
+        }
+      }
+      &:last-child{
+        margin-right: 8px;
+        background-position: 0 0 ;
+      }
+    }
+
+  }
+  //进度条样式设置
+  #progress{
+    width: 100%;
+    height: 25px;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    position: relative;
+    .progress-pro{
+      width: 100%;
+      height: 3px;
+      background: #737373;
+      position: absolute;
+      &:hover{
+        height: 5px;
+      }
+    }
+    .progress-slide{
+      width: 9px;
+      height: 7px;
+      background: #ffffff;
+      border-radius: 2px;
+      position: absolute;
+      &:hover{
+        width: 12px;
+        height: 10px;
+      }
+    }
+    .progress-rate{
+      width: 0;
+      height: 3px;
+      position: absolute;
+      z-index: 1;
+      background: dodgerblue;
+    }
+
+  }
+  //右侧样式设置
+  #right{
+    width: 230px;
+    height: 25px;
+    display: flex;
+    flex: none;
+    align-items: center;
+    //时间样式设置
+    .time{
+      width: 120px;
+      font-size: 12px;
+      text-align: center;
+      color: #fff;
+    }
+    //音量样式设置
+    .volume{
+      width: 80px;
+      display: flex;
+      align-items: center;
+      //音量图标样式设置
+      .volume-log{
+        width: 20px;
+        height: 25px;
+        span{
+          display: block;
+          width: 12px;
+          height: 12px;
+          margin: 7px auto;
+          background: url(../image/icon.png) no-repeat;
+          background-position:0 -34px;
+          &.active{
+            background-position: 0 -46px;
+          }
+        }
+      }
+      //音量进度条样式设置
+      .volume-progress{
+        width: 60px;
+        height: 25px;
+        display: flex;
+        align-items: center;
+        position: relative;
+        .volume-pro{
+          width: 100%;
+          height: 3px;
+          background: #737373;
+          &:hover{
+            height: 5px;
+          }
+        }
+        .volume-slide{
+          width: 9px;
+          height: 7px;
+          background: #ffffff;
+          border-radius: 2px;
+          align-items: center;
+          position: absolute;
+          right: 0;
+          z-index: 2;
+          &:hover{
+            width: 12px;
+            height: 10px;
+          }
+        }
+        .volume-rate{
+          width: 100%;
+          height: 3px;
+          position: absolute;
+          z-index: 1;
+          background: dodgerblue;
+        }
+      }
+    }
+    //满屏样式设置
+    .full{
+      width: 30px;
+      display: flex;
+      span{
+        margin: auto;
+        display: block;
+        width: 11px;
+        height: 11px;
+        background: url(../image/icon.png) no-repeat;
+        background-position: 0 -58px;
+        &.active{
+          background-position: 0 -70px;
+        }
+      }
+    }
+  }
+}

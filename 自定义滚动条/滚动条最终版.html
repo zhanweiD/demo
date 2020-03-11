@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style type="text/css">
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    body,html{
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    #contain{
+      width: 15px;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: #f1f1f1;
+    }
+    #scroll{
+      width: 100%;
+      background: #c1c1c1;
+      position: absolute;
+      left: 0;
+      top: 15px;
+    }
+    #center{
+      position: absolute;
+      width: 100%;
+      left: 0;
+      top: 0;
+    }
+    #up,#down{
+      position: absolute;
+      width: 100%;
+      height: 15px;
+      background: #f1f1f1;
+    }
+    #up{
+      left: 0;
+      top: 0;
+    }
+    #down{
+      left: 0;
+      bottom: 0px;
+    }
+    #up-div{
+      margin-top: 0px  ;
+      margin-left: 2.5px;
+      width: 0;
+      height: 0;
+      border-top:5px solid transparent;
+      border-left:5px solid transparent;
+      border-right:5px solid transparent;
+      border-bottom:5px solid #c1c1c1;
+    }
+    #down-div{
+      margin-top: 5px  ;
+      margin-left: 2.5px;
+      width: 0;
+      height: 0;
+      border-top:5px solid #000;
+      border-left:5px solid transparent;
+      border-right:5px solid transparent;
+      border-bottom:5px solid transparent;
+
+    }
+  </style>
+</head>
+<body>
+  <div id="center"></div>
+  <div id="contain">
+    <div id="up">
+      <div id="up-div"></div>
+    </div>
+    <div id="scroll"></div>
+    <div id="down">
+      <div id="down-div"></div>
+    </div>
+  </div>
+<script type="text/javascript">
+  (function () {
+    var scroll=document.querySelector("#scroll")
+    var center=document.querySelector("#center")
+    var contain=document.querySelector("#contain")
+    var up=document.querySelector("#up")
+    var down=document.querySelector("#down")
+    var divup=document.querySelector("#up-div")
+    var divdown=document.querySelector("#down-div")
+    var size=up.offsetHeight
+    var change=50
+
+    for (var i=0;i<300;i++){
+      center.innerHTML+=i+"<br>"
+    }
+    //计算滑块大小
+    var scale=window.innerHeight/center.offsetHeight
+    if (scale>=1){
+      contain.remove()
+      return
+    }
+
+    //滑块滑动区域要减去两个div的高度
+    scroll.style.height=(window.innerHeight-size*2)*scale+"px"
+
+    //滚动条拖拽函数
+    scroll.onmousedown=function (event) {
+      var clickY =event.offsetY
+      document.onmousemove=function (event) {
+        var setTop=event.clientY-clickY
+        setOffset(setTop)
+      }
+      document.onmouseup=function () {
+        this.onmousemove=null
+      }
+      event.preventDefault();
+      return false;
+    }
+
+    //绑定上下按钮响应函数
+    up.onclick=Updiv
+    down.onclick=Downdiv
+
+    //绑定滚轮滚动函数
+    document.onmousewheel=Scroll
+    document.addEventListener("DOMMouseScroll",Scroll)
+
+
+    function Updiv(){
+      //点击up全体向上change个像素
+      var setTop=scroll.offsetTop-change
+      setOffset(setTop)
+    }
+    function Downdiv(){
+      //点击down全体向下change个像素
+      var setTop=scroll.offsetTop+change
+      setOffset(setTop)
+    }
+
+    //滚轮滚动函数
+    function Scroll (event) {
+      //!!!注意event是谁
+      var Top=0
+      if (event.wheelDelta>0||event.detail<0) {
+        Top = -10
+      }
+      else{
+        Top = 10
+      }
+
+      var setTop=scroll.offsetTop+Top
+      setOffset(setTop)
+    }
+
+    //设置滑块和内容区的位置
+    function setOffset(setTop) {
+      //限定滑块不能超过两个div，并且当达到临界点时,div改变并不能触发点击函数,否则反之
+      //不用将点击函数设为空，因为此判断不会让滑块超过div，所以达到临界后点击，虽然触发事件但不会影响滑块位置
+      if (setTop<=size){
+        setTop=size
+        divup.style.borderBottomColor="#c1c1c1"
+      }else {
+        divup.style.borderBottomColor="black"
+      }
+      if(setTop>=window.innerHeight-size-scroll.offsetHeight){
+        setTop=window.innerHeight-size-scroll.offsetHeight
+        divdown.style.borderTopColor="#c1c1c1"
+      }
+      else{
+        divdown.style.borderTopColor="black"
+      }
+
+      //设置滑块的位置
+      scroll.style.top=setTop+"px"
+      //必须放到判断下边，不然会内容会溢出
+
+      //计算滑块滑动位置与滑动区域的比例，零点相对应是top=size,所以要将size减去，不然内容区一开始就会偏移
+      var mainScale1=(scroll.offsetTop-size)/(window.innerHeight-scroll.offsetHeight-size*2)
+      //内容区位置等于内容大小减去视口大小再乘上scale1
+      center.style.top=-(center.offsetHeight-window.innerHeight)*mainScale1+"px"
+    }
+  })()
+</script>
+</body>
+</html>

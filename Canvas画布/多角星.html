@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style type="text/css">
+    canvas{
+      background: #f00;
+      display: block;
+      margin: 100px auto;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+<script type="text/javascript">
+  (function () {
+    var r=100
+    var r2=80
+    var x=200
+    var y=200
+    var myCanvas=document.querySelector("#canvas")
+    var ctx=myCanvas.getContext("2d")
+    myCanvas.width=800
+    myCanvas.height=600
+    ctx.strokeStyle="red"
+    ctx.lineWidth=2
+    ctx.fillStyle="yellow"
+
+    function polygon(n){
+      var angle=360/n
+      ctx.beginPath()
+      for (var i=0;i<n;i++ ){
+        ctx.lineTo(x+r*Math.cos((90+i*angle)/180*Math.PI),y-r*Math.sin((90+i*angle)/180*Math.PI))
+        ctx.lineTo(x+r2*Math.cos((90+angle/2+i*angle)/180*Math.PI),y-r2*Math.sin((90+angle/2+i*angle)/180*Math.PI))
+      }
+      // alert(x+x*Math.cos((90+i*angle)/180*Math.PI))
+      ctx.closePath()
+      ctx.stroke()
+      ctx.fill()
+    }
+   polygon(10)
+  })()
+</script>
+</body>
+</html>

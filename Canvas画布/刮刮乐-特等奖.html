@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style type="text/css">
+    canvas{
+      background:#fff;
+      background-size: cover;
+      display: block;
+      margin: 100px auto;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+  <script type="text/javascript">
+    (function () {
+      //获取对象
+      var myCanvas=document.querySelector("#canvas")
+      myCanvas.width=600
+      myCanvas.height=600
+      var ctx=myCanvas.getContext("2d")
+
+      ctx.font="bold,50px,微软雅黑"
+      ctx.fillStyle="#f00"
+      ctx.fillText("特等奖",300,300)
+
+      ctx.globalCompositeOperation="source-over"
+
+      ctx.fillStyle="#333"
+      ctx.fillRect(0,0,myCanvas.width,myCanvas.height)
+
+      ctx.globalCompositeOperation="destination-out"
+
+      ctx.lineWidth=30
+      ctx.lineCap="round"
+      ctx.beginPath()
+      Scratchers()
+      //刮刮乐封装
+      function Scratchers() {
+        myCanvas.onmousedown=function (event) {
+          event = event||window.event
+          ctx.beginPath()
+          ctx.moveTo(event.offsetX,event.offsetY)
+          document.onmousemove=function (event) {
+            event = event||window.event
+            ctx.lineTo(event.clientX-myCanvas.offsetLeft,event.clientY-myCanvas.offsetTop)
+            ctx.stroke()
+          }
+          document.onmouseup=function () {
+            document.onmousemove=null
+          }
+        }
+
+      }
+    })()
+  </script>
+</body>
+</html>

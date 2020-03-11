@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义滚动条</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        #box {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            width: 200px;
+            height: 200px;
+            background: deepskyblue;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="box"></div>
+
+    <script>
+        (function () {
+            // 获取元素
+            var box = document.querySelector('#box');
+
+            // mousewheel  chrome. ie
+            box.onmousewheel = scrollFn;
+            // DOMMouseScroll   firfox  必须使用 dom2绑定方式
+            box.addEventListener('DOMMouseScroll', scrollFn);
+
+
+            /**
+             * 滚轮事件 触发的函数
+             * */
+            function scrollFn(event) {
+
+               /*
+               * chrome ie  event.wheelDelta   120 往上滚  -120 往下滚
+               * firefox:    event.detail      -3  往上滚   3 往下滚
+               * */
+
+               var flag = '';  // 标记 向上滚还是向下滚 up  down
+
+              if (event.wheelDelta) {
+                  // chrome 、 IE
+                  if (event.wheelDelta > 0) {
+                      flag = 'up';
+                  } else {
+                      flag = 'down';
+                  }
+
+              } else if (event.detail) {
+                  // firefox
+                  if (event.detail < 0) {
+                      flag = 'up';
+                  } else {
+                      flag = 'down';
+                  }
+              }
+
+
+              if (flag == 'up') {
+                  // 让元素放大
+                  box.style.width = box.offsetWidth + 5 + 'px';
+                  box.style.height = box.offsetHeight + 5 + 'px';
+
+              } else if (flag ==  'down') {
+                  // 让元素缩小
+                  box.style.width = box.offsetWidth - 5 + 'px';
+                  box.style.height = box.offsetHeight - 5 + 'px';
+              }
+
+            }
+
+        })()
+
+    </script>
+</body>
+</html>

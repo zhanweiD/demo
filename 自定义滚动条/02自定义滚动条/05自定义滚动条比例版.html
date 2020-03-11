@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义滚动条</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        /*去掉系统滚动条*/
+        html,body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #scrollBar {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40px;
+            height: 100%;
+            background: #ccc;
+        }
+        #slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: deeppink;
+        }
+
+        #content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <!-- 内容 -->
+    <div id="content"></div>
+
+
+    <!-- 滚动条 -->
+    <div id="scrollBar">
+        <div id="slider"></div>
+    </div>
+
+
+    <script>
+        (function () {
+            // 获取元素
+            var slider = document.querySelector('#slider');
+            var content = document.querySelector('#content');
+            var scrollBar = document.querySelector('#scrollBar');
+
+            // 创造内容
+            for (var i = 0; i <= 300; i ++) {
+                content.innerHTML += i + '<br>';
+            }
+
+            // 计算滑块的高度
+            // 计算视口高度在内容高度所占的比例
+            var scale = window.innerHeight / content.offsetHeight;
+            // 判断
+            if (scale >= 1) {
+                scrollBar.remove();  // 删除元素
+                return;
+            }
+            // 设置滚动滑块的高度
+            slider.style.height = window.innerHeight * scale + 'px';
+
+            // 鼠标按下事件
+            slider.onmousedown = function(event){
+                // 获取鼠标在元素上的位置
+                var eleTop = event.offsetY;
+
+                // 鼠标移动事件
+                document.onmousemove = function(event){
+                    // 计算滑块位置
+                    var dstTop = event.clientY - eleTop;
+
+                    // 范围限定
+                    if (dstTop < 0) {
+                        dstTop = 0;
+                    } else if (dstTop > window.innerHeight - slider.offsetHeight) {
+                        dstTop = window.innerHeight - slider.offsetHeight;
+                    }
+
+
+                    //设置滑块位置
+                    slider.style.top = dstTop + 'px';
+
+                    // 设置内容的位置
+                    content.style.top = - dstTop / scale + 'px';
+
+                };
+
+                // 鼠标抬起事件
+                document.onmouseup = function () {
+                    this.onmousemove = null; // 取消事件监听
+                };
+
+                //阻止浏览器默认行为
+                event.preventDefault();
+                return false;
+            }
+        })();
+
+
+
+        /*
+        *  sliderScale = 视口高度 / 内容高度 = 滑块高度 / 视口高度
+        *  scale = 滑块位置 / (视口高度 - 滑块高度) = 内容位置 / (内容高度 - 视口高度)
+        *
+        *  vH: 视口高度
+        *  cH: 内容高度
+        *  sH: 滑块高度
+        *  sT: 滑块位置
+        *  cT：内容位置
+        *
+        *   s1 = vH / cH = sH / vH
+        *   s2 = sT / (vH - sH) = cT / (cH - vH)
+        *
+        *   cT = sT / (vH - sH) * (cH - vH)
+        *   cT = sT / (vH - sH) / ( 1 / (cH - vH))
+        *   cT = sT / ((vH - sH) / (cH - vH))
+        *
+        * */
+
+        /**
+         *  a * b = a / (1 / b)
+         *  1/4  / 1/2      =   1 / 2
+         * */
+
+        /*
+        * a / c = b / d = (a - b) / (c - d)
+        *
+
+            a / c = b / d = k
+
+            a = k*c
+            b = k*d
+            a - b = k * c - k *d
+            a - b = k * (c - d)
+            (a - b) / (c - d) = k
+
+        * */
+    </script>
+</body>
+</html>

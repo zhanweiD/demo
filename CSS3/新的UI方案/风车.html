@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style type="text/css">
+    html,body{
+      height: 100%;
+      overflow: hidden;
+    }
+    #div{
+      width: 440px;
+      height: 440px;
+      margin: 20px auto;
+      transition: 10s linear;
+    }
+    #div>div{
+      width: 200px;
+      height: 200px;
+      margin: 10px 10px;
+      float: left;
+      background: #449fdb;
+      border-radius: 0 50%;
+    }
+    #div>div:nth-child(2),#div>div:nth-child(3){
+      border-radius: 50% 0;
+    }
+    #div:hover{
+      transform: rotate(1800deg) ;
+      transform-origin: center center;
+    }
+  </style>
+</head>
+<body>
+<div id="div" >
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
+</body>
+</html>

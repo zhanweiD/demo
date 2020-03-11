@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style type="text/css">
+    #canvas{
+      background: #333333;
+      display: block;
+      margin: 0px auto;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+  <script type="text/javascript">
+    (function () {
+      var myCanvas=document.querySelector("#canvas")
+      var ctx=myCanvas.getContext("2d")
+      var x=200
+      var y=150
+      var index=0
+      myCanvas.width=800
+      myCanvas.height=800
+      ctx.strokeStyle="#fff"
+      ctx.fillStyle="#ffffff"
+      ctx.lineWidth=1
+    setInterval(function () {
+      ctx.clearRect(0,0,800,800)
+      ctx.beginPath()
+      ctx.save()
+      ctx.translate(400,300)
+      ctx.rotate(index/180*Math.PI)
+      ctx.fillRect(-100, -100, 200,200)
+      ctx.fill()
+      index++
+      ctx.restore()
+    },30)
+
+
+    })()
+  </script>
+</body>
+</html>

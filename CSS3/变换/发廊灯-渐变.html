@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style type="text/css">
+    html,body{
+      height: 100%;
+      overflow: hidden;
+    }
+    #div{
+      width: 29px;
+      height: 250px;
+      margin: 50px auto;
+      overflow: hidden;
+      border: 1px solid;
+    }
+    #div>div{
+      width: 30px;
+      height: 750px;
+      background: #449fdb;
+      background: repeating-linear-gradient(-40deg, black 0px,black 10px,white 10px,white 20px);
+      position: relative;
+      /*transition: 3s linear;*/
+      top: 0;
+      left: 0;
+    }
+    /*#div:hover>div{*/
+    /*  top: -500px;*/
+    /*}*/
+  </style>
+</head>
+<body>
+  <div id="div">
+    <div></div>
+  </div>
+<script type="text/javascript">
+  var div=document.querySelector("#div>div")
+  div.onclick=function () {
+    var top=0
+    setInterval(function () {
+      top --
+      if (top<-500){
+        top = 0
+      }
+      div.style.top = top+"px"
+    },10)
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+
+*{
+   margin: 0;
+   padding: 0;
+ }
+@pink:pink;
+//这是不显示的注释
+/*这是显示的注释*/
+#wrap{
+  //#wrap:extend(.extend){
+  &:extend(.extend);
+  .middle(r,100px,200px);
+  width: ~"calc(100 + 400px)";
+  height: 500px;
+  border: 1px solid black;
+  background: @pink;
+  .inner{
+    //.inner:extend(.extend){
+    &:extend(.extend);
+    .middle(c);
+    background: #449fdb;
+    &:hover{
+      background: #e74c3c;
+    }
+  }
+}

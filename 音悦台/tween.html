@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <script type="text/javascript">
+    function tweenMove(speed,time,type) {
+//		t:当前次数
+      var t =0;
+//		b:元素起始位置
+      var b = transformCss(contentWrap, "translateY")
+//		c元素结束位置与起始位置的距离差
+      var c =speed*100;
+//		d:总次数
+      var d = time/0.02;
+//		s:回弹系数，s值越大，回弹效果越远
+//		var s = 5;
+    }
+    var Tween = {
+       Linear: function(t,b,c,d){ return c*t/d + b; },
+       easeOut: function(t,b,c,d,s){
+        if (s == undefined) s = 1.70158;
+         return c*((t=t/d-1)*t*((s+1)*t + s) + 1) + b;
+       }
+     }
+    for (var i = 0; i < 20; i++) {
+      console.log(Tween["Linear"](i, 0,100,20))
+    }
+  </script>
+</body>
+</html>

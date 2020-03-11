@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style type="text/css">
+    label{
+      float: left;
+      width: 200px;
+      height: 200px;
+      background: rgba(0,0,0,0.5);
+      margin: 10px  ;
+      position: relative;
+      overflow: hidden;
+      border-radius: 50%;
+    }
+    span{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+    input{
+      position: absolute;
+      top: -100px;
+    }
+    input:checked+span{
+      background: black;
+    }
+
+  </style>
+</head>
+<body>
+<!--    for这这种况下可以不写，思路：将单选框和一个空白兄弟放到label中，-->
+<!--    然后让单选框消失，设置单选框选中后，其显示兄弟的样式变化，注意其兄弟为内敛元素要设置浮动才能显示-->
+  <label for="radio1">
+    <input type="radio" name="radio" id="radio1">
+    <span></span>
+  </label>
+  <label for="radio2">
+    <input type="radio" name="radio" id="radio2">
+    <span></span>
+  </label>
+  <label for="radio3">
+    <input type="radio" name="radio" id="radio3" >
+    <span></span>
+  </label>
+</body>
+</html>

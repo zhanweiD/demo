@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style type="text/css">
+    body{
+      background: gray;
+    }
+    #wrap{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate3d(-50%,-50%,0);
+      white-space: nowrap;
+    }
+    #wrap>p{
+      float: left;
+      margin-left: 10px;
+      font-size: 25px;
+      animation:move 0.5s linear both infinite alternate running;
+    }
+    @keyframes move {
+      from{
+        transform: translateY(0px);
+      }
+      to{
+        transform: translateY(-25px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="wrap">
+    <p>欢</p>
+    <p>迎</p>
+    <p>来</p>
+    <p>到</p>
+    <p>我</p>
+    <p>的</p>
+    <p>世</p>
+    <p>界</p>
+  </div>
+  <script type="text/javascript">
+    var pArr=document.querySelectorAll("#wrap>p")
+    var color=["red","yellow","blue","green","darkorchid","chartreuse","chocolate","blanchedalmond"]
+    var cssText=""
+    var styleText=document.createElement("style")
+    for (var i=0;i<pArr.length;i++){
+      cssText+="#wrap>p:nth-child("+(i+1)+"){animation-delay:"+i*0.2+"s;color:"+color[i]+"}"
+    }
+    styleText.innerHTML=cssText
+    document.head.appendChild(styleText)
+  </script>
+</body>
+</html>

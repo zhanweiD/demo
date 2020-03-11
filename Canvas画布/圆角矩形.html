@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style type="text/css">
+    #canvas{
+      background: #333333;
+      display: block;
+      margin: 100px auto;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+  <script type="text/javascript">
+    (function () {
+      var myCanvas=document.querySelector("#canvas")
+      var ctx=myCanvas.getContext("2d")
+      myCanvas.width=800
+      myCanvas.height=600
+      ctx.strokeStyle="#fff"
+
+      ctx.beginPath()
+      ctx.moveTo(350,150)
+      ctx.arcTo(600,150,600,200,50)
+      ctx.arcTo(600,300,500,300,50)
+      ctx.arcTo(300,300,300,200,50)
+      ctx.arcTo(300,150,450,150,50)
+
+      ctx.stroke()
+    })()
+  </script>
+</body>
+</html>

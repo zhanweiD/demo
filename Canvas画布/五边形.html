@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style type="text/css">
+    canvas{
+      background: #f00;
+      display: block;
+      margin: 100px auto;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+<script type="text/javascript">
+  (function () {
+    var angle=360/5
+    var r=100
+    // var x=100
+    // var y=100
+    var myCanvas=document.querySelector("#canvas")
+    var ctx=myCanvas.getContext("2d")
+    myCanvas.width=800
+    myCanvas.height=600
+    ctx.strokeStyle="red"
+    ctx.lineWidth=2
+    ctx.fillStyle="yellow"
+    var x=prompt("请输入中心位置x坐标:")-0
+    var y=prompt("请输入中心位置y坐标:")-0
+    ctx.beginPath()
+    for (var i=0;i<5;i++ ){
+      ctx.lineTo(x+r*Math.cos((90+i*angle)/180*Math.PI),y-r*Math.sin((90+i*angle)/180*Math.PI))
+    }
+    // alert(x+x*Math.cos((90+i*angle)/180*Math.PI))
+    ctx.closePath()
+    ctx.stroke()
+    ctx.fill()
+  })()
+</script>
+</body>
+</html>

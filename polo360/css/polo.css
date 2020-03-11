@@ -1,0 +1,324 @@
+body{
+	background: url(../img/bodybj.png) repeat-x;
+}
+/*设置一个通用的宽度和居中效果*/
+.w{
+	margin: 0 auto;
+	width:940px;
+}
+/*设置logo排版*/
+.logo{
+	padding: 37px 0px 47px 15px;
+}
+/*设置列表(lb)排版*/
+.lb{
+	float:right;
+	padding: 59px 12px 0px 0px;
+}
+.lb li{
+	float:left;
+	border-left:#d6d6d6 1px dashed ;
+	padding: 0px 9px 10px 10px;
+}
+.lb a{
+	color:#666;
+	font: bold 14px "Georgia";
+	text-decoration: none;
+}
+.lb a:hover{
+	color:#9a9999;
+	text-decoration: underline;
+}
+.lb p{
+	color:#7b7b7b;
+	font: 11px "Tahoma";
+}
+/*设置wave排版*/
+.wave{
+	width: 940px;
+	height: 355px;
+	background: url(../img/wbj.png) bottom center no-repeat;
+	position: relative;
+	overflow: hidden;
+	margin: 0 auto;
+}
+#ul1{
+	width: 5760px;
+	position: absolute;
+}
+#ul1 li{
+	margin-right: 20px;
+	float: left;
+				
+}
+/*鼠标移入改变样式*/
+.wave a:hover{
+	
+}
+.dian ul{
+	position: absolute;
+	left:19px;
+	top:313px;
+}
+.dian li{
+	float: left;
+	padding-right: 4px;
+}
+/*解决高度塌陷和父子元素同外边距问题*/
+.chearfix:after,.chearfix:before{
+	content:"";
+	display:table;
+	clear:both;
+}
+.chearfix{
+	zoom:1;
+}
+/*设置大标题样式*/
+#h1{
+	color:#000;
+	font:bold 24px "Georgia";
+	text-align: center;
+	padding: 11px 0px 21px 0px;
+	border-bottom: #e5e5e5 solid 1px;
+	margin-bottom: 1px;
+}
+/*设置中间内容（nr）区的样式*/
+.tuwen{
+	width:300px;
+}
+.nr{
+	height:470px;
+	padding-bottom: 35px;
+	border-bottom: #d8d8d8 solid 1px;
+}
+.nr .pl{
+	float:left;
+}
+.nr .cs{
+	float:left;
+	padding: 0px 20px;
+}
+.nr .uc{
+	float:right;
+}
+.nr .h2 a{
+	color:#11719e;
+	font:21px Georgia;
+	text-decoration: none;
+}
+.nr .h2 a:hover{
+	color:#1aa5e6;
+	text-decoration: underline;
+}
+.nr .xbt1 p,
+.nr .xbt2 p,
+.nr .xbt3 p{
+	color:#8c8c8c;
+	font: 12px Myriad Pro;
+}
+.nr .xbt1,
+.nr .xbt2,
+.nr .xbt3{
+	margin-top: 37px;
+}
+.nr .boy{
+	margin:11px 0px;
+}
+.pl .dl,
+.cs .dl,
+.uc .dl{
+	color:#3e3e3e;
+	font:13px/24px Myriad Pro
+}
+.uc img{
+	padding-left:1px ;
+}
+button{
+	margin:0px;
+	padding: 0px;
+}
+.nr button{
+	width: 163px;
+	height: 40px;
+	margin-top:13px;
+	background: url(../img/anbj.png) no-repeat;
+	border: none;
+	cursor: pointer;
+}
+.an{
+	color: #016999 ;
+	font:12px Myriad Pro;
+	text-indent: 1em;
+	text-align: left;
+	_margin-left:-1em;
+}
+.an:hover{
+	color:#0592d3;
+}
+.foot{
+	margin-top: 40px;
+}
+.scn{
+	width: 300px;
+	height: 350px;
+	
+}
+.scn .h2{
+	color:#444;
+	font: 18px Georgia;
+	padding-bottom: 9px;
+	border-bottom: #d3d3d3 dashed 1px;
+}
+.sc{
+	float: left;
+}
+.ct{
+	float:left;
+	margin: 0px 20px;
+	float: left;
+}	
+.nu{
+	float: left;
+}
+.ct input{
+	margin-top: 16px;
+	border: none;
+	width:296px;
+	height:33px;
+	background: url(../img/text.png) no-repeat;
+	text-indent: 1em;
+	padding: 0;
+}
+
+.ct textarea{
+	width: 296px;
+	height: 124px;
+	margin-top: 16px;
+	border: none;
+	background: url(../img/wby.png) no-repeat;
+	resize:none;
+	overflow: auto;
+	text-indent: 1em;
+	padding: 5px 0px;
+	line-height:20px;
+}
+.ct button{
+	width: 163px;
+	height: 32px;
+	margin-top: 11px;
+	border: none;
+	background: url(../img/an2.png) no-repeat;
+	color: #87ced4 ;
+	font:12px/1em Myriad Pro;
+	text-indent: 1em;
+	text-align: left;
+}
+.an2:hover{
+	color: #fff;
+}
+.sc p{
+	height:26px;
+	color:#787878;
+	font:12px/1em "Myriad Pro";
+	margin-top: 12px;
+	margin-bottom:6px ;
+	line-height: 15px;
+}
+.sc li{
+	float:left
+}
+.sc .lianjie{
+	margin-bottom: 30px;
+}
+.sc input{
+	margin-top:10px;
+	border: none;
+	width:296px;
+	height:33px;
+	background: url(../img/text.png) no-repeat;
+	text-indent: 1em;
+	padding: 0;
+}
+.sc button{
+	width: 163px;
+	height: 32px;
+	margin-top: 12px;
+	border: none;
+	background: url(../img/an2.png) no-repeat;
+	color: #87ced4 ;
+	font:12px Myriad Pro;
+	text-indent: 1em;
+	text-align: left;
+}
+#hh{
+	float:left;
+}
+.nu p{
+	height:26px;
+	color:#787878;
+	font:12px "Myriad Pro";
+	margin-top: 12px;
+	margin-bottom:6px ;
+	line-height: 15px;
+}
+.nu .hg{
+	margin-top: 16px;
+}
+.nu .xinwen{
+	height: 68px;
+	border-bottom: #d3d3d3 dashed 1px;
+}
+.nu button{
+	width: 163px;
+	height: 32px;
+	margin-top: 13.5px;
+	border: none;
+	background: url(../img/an2.png) no-repeat;
+	color: #87ced4 ;
+	font:12px Myriad Pro;
+	text-indent: 1em;
+	text-align: left;
+}
+.banquan .clj{
+	margin: 18px 0px 0px 470px;
+}
+.banquan .clj,
+.banquan a{
+	float: left;
+	color:#999;
+	font: 11px "Myriad Pro";
+	text-decoration: none;
+}
+.banquan a:hover{
+	color:#d5cbcb;
+	text-decoration: underline;
+}
+.banquan .bq{
+	float: left;
+	color:#999;
+	font:11px "Myriad Pro";
+	margin-top: 18px;
+	margin-left: 260px;
+}
+.banquan{
+	height:178px;
+	background: url(../img/bqbj.gif) repeat-x;
+	border-top: 10px #4c4c4c solid;
+}
+.banquan li{
+	float:left;
+}
+.banquan .clear{
+	clear: both;
+}
+#shsj{
+	_margin-left: -1em;
+}
+.margin-top{
+	_margin-top: 1em;
+}
+#margin-right{
+	_margin-left: 142px;
+	_margin-right: 40px;
+}
+

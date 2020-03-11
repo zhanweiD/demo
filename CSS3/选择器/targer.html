@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style type="text/css">
+    a{
+      color: #555555;
+      border: black solid 1px;
+      text-decoration: none;
+    }
+    #div1{
+      width: 200px;
+      height: 100px;
+      background: red;
+    }
+    #div2{
+      width: 200px;
+      height: 100px;
+      background: black;
+    }
+    #div3{
+        width: 200px;
+        height: 100px;
+        background: yellow;
+      }
+    div{
+      display: none;
+    }
+    /*target代表跳转后的地址*/
+   :target{
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <a href="#div1">切换1</a>
+  <a href="#div2">切换1</a>
+  <a href="#div3">切换1</a>
+
+  <div id="div1"></div>
+  <div id="div2"></div>
+  <div id="div3"></div>
+</body>
+</html>

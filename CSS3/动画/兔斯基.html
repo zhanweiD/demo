@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style type="text/css">
+    #wrap{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin-left: -24px;
+      margin-top: -24px;
+      width: 48px;
+      height: 48px;
+      background: #449fdb;
+      overflow: hidden;
+    }
+    #wrap>img{
+      animation:tsj 0.8s steps(12,end) infinite forwards running alternate;
+    }
+    @keyframes tsj {
+      from{
+        transform: translateX(0px);
+      }
+      to{
+        transform: translateX(-576px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="wrap">
+    <img src="img/animation.png" alt="">
+  </div>
+</body>
+</html>

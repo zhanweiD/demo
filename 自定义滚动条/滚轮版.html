@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style type="text/css">
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    body,html{
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    #contain{
+      width: 15px;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: #f1f1f1;
+    }
+    #scroll{
+      width: 100%;
+      background: #c1c1c1;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+    #center{
+      position: absolute;
+      width: 100%;
+      left: 0;
+      top: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="center"></div>
+  <div id="contain">
+    <div id="scroll"></div>
+  </div>
+<script type="text/javascript">
+  (function () {
+    var scroll=document.querySelector("#scroll")
+    var center=document.querySelector("#center")
+    var contain=document.querySelector("#contain")
+
+    for (var i=0;i<300;i++){
+      center.innerHTML+=i+"<br>"
+    }
+    //计算滑块大小
+    var scale=window.innerHeight/center.offsetHeight
+    if (scale>=1){
+      contain.remove()
+      return
+    }
+    scroll.style.height=window.innerHeight*scale+"px"
+
+    //滚动条拖拽函数
+    scroll.onmousedown=function (event) {
+      var clickY =event.offsetY
+      document.onmousemove=function (event) {
+        var setTop=event.clientY-clickY
+        setOffset(setTop)
+      }
+      document.onmouseup=function () {
+        this.onmousemove=null
+      }
+      event.preventDefault();
+      return false;
+    }
+
+    //绑定滚轮滚动函数
+    document.onmousewheel=Scroll
+    document.addEventListener("DOMMouseScroll",Scroll)
+
+    //滚轮滚动函数
+    function Scroll (event) {
+      //!!!注意event是谁
+      var Top=0
+      if (event.wheelDelta>0||event.detail<0) {
+        Top = -10
+      }
+      else{
+        Top = 10
+      }
+      // if (event.wheelDelta) {
+      //   // ie chrome
+      //   if (event.wheelDelta > 0) {
+      //     // 向上
+      //     addValue = -5;
+      //   } else {
+      //     // 向下
+      //     addValue = 5;
+      //   }
+      //
+      // } else if (event.detail) {
+      //   // firefox
+      //   if (event.detail < 0) {
+      //     // 向上
+      //     addValue = -5;
+      //   } else {
+      //     // 向下
+      //     addValue = 5;
+      //   }
+      // }
+
+      //错误版，此时的event为滚轮，即光标，所以光标在哪滑块就会跳转到哪
+      //var setTop=event.clientY+Top
+
+      var setTop=scroll.offsetTop+Top
+      setOffset(setTop)
+    }
+
+    //设置滑块和内容区的位置
+    function setOffset(setTop) {
+      if (setTop<0){
+        setTop=0
+      } else if(setTop>window.innerHeight-scroll.offsetHeight){
+        setTop=window.innerHeight-scroll.offsetHeight
+      }
+
+      scroll.style.top=setTop+"px"
+      //必须放到判断下边，不然会内容会溢出
+      center.style.top=-(setTop/scale)+"px"
+    }
+  })()
+</script>
+</body>
+</html>

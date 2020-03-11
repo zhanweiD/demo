@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style type="text/css">
+    #wrap{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin-left: -65px;
+      margin-top: -65px;
+      width: 130px;
+      height: 130px;
+      overflow: hidden;
+    }
+    #wrap>img{
+      animation:qs 2s steps(32,end) infinite both running ;
+    }
+    @keyframes qs {
+      from{
+        transform: translateY(0px);
+      }
+      to{
+        transform: translateY(-4160px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="wrap">
+    <img src="img/bike.png" alt="">
+  </div>
+</body>
+</html>
